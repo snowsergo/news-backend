@@ -11,8 +11,8 @@
 
 
 ## Адреса для отправки запросов
-- [https://www.snowsergo-news.tk/api](https://www.snowsergo-news.tk/api)
-- [https://snowsergo-news.tk/api](https://snowsergo-news.tk/api)
+- [https://www.api.snowsergo-news.tk](https://www.api.snowsergo-news.tk)
+- [https://api.snowsergo-news.tk](https://api.snowsergo-news.tk)
 
 ## Функционол
 
