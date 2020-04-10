@@ -4,12 +4,6 @@
 ## Текущая версия
 1.0.1
 
-## Ссылки на приложение
-- [https://www.snowsergo-news.tk](https://www.snowsergo-news.tk)
-- [https://snowsergo-news.tk](https://snowsergo-news.tk)
-- [https://84.201.169.244](https://84.201.169.244)
-
-
 ## Адреса для отправки запросов
 - [https://www.api.snowsergo-news.tk](https://www.api.snowsergo-news.tk)
 - [https://api.snowsergo-news.tk](https://api.snowsergo-news.tk)
