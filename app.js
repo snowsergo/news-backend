@@ -1,5 +1,4 @@
 const express = require('express');
-const rateLimit = require('express-rate-limit'); // ограничени количества запросов
 
 require('dotenv').config(); // модуль для работы с переменными окружения, в них будем хранить ключи
 
@@ -9,6 +8,7 @@ const morgan = require('morgan'); // для логов
 const mongoose = require('mongoose'); // для работы с базой данных
 const bodyParser = require('body-parser');// подключили body-parser
 const { errors } = require('celebrate');
+const limiter = require('./modules/rate-limiter'); // подключили ограничение зколичества запросов
 const { userSignin, userSignup } = require('./modules/validators');
 const config = require('./config.js'); //  в этом файле временная база данных в формате json
 
@@ -24,14 +24,10 @@ const errorMiddleware = require('./middlewares/error.js');
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // за 15 минут
-  max: 100, // можно совершить максимум 100 запросов с одного IP
-});
-
 app.use(cookieParser()); // подключаем парсер кук как мидлвэр
 app.use(limiter); // ограничение на количество запросов
 app.use(helmet()); // подключаем заголовки безопасности
+
 // подключаем body-parser как мидлвару всего приложения
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

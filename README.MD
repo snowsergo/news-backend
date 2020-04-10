@@ -2,17 +2,23 @@
 Учебный сервер,  обеспечивающий работу с пользователями и статьями
 
 ## Текущая версия
-1.0.0
+1.0.1
 
 ## Ссылки на приложение
 - [https://www.snowsergo-news.tk](https://www.snowsergo-news.tk)
 - [https://snowsergo-news.tk](https://snowsergo-news.tk)
+- [https://84.201.169.244](https://84.201.169.244)
+
 
 ## Адреса для отправки запросов
 - [https://www.snowsergo-news.tk/api](https://www.snowsergo-news.tk/api)
 - [https://snowsergo-news.tk/api](https://snowsergo-news.tk/api)
 
 ## Функционол
+
+### version 1.0.1
+- rate-limiter вынесен в отдельный модуль
+- добавлен публичный ip адрес 84.201.169.244
 
 ### version 1.0.0
 - создание пользователя POST /signup
@@ -21,7 +27,7 @@
 - сохранение новости на сервере POST /articles
 - удаление новости на сервере DELETE /articles/articleId
 - возвращение всех сохраненных новостей GET /articles
-- запросы можно проверить в postman по адресу http://localhost:3000
+- запросы можно проверить в postman по адресу http://localhost:3000 в dev режиме
 
 ## Установка проекта
 
