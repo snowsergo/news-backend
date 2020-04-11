@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     validate: {
-      validator: (value) => /(^[А-ЯЁ][а-яё]+( [А-ЯЁ][а-яё]+)?$)|(^[A-Z][a-z]+( [A-Z][a-z]+)?$)/.test(value),
+      validator: (value) => /(^[А-ЯЁ][а-яё]+(( [А-ЯЁ][а-яё]+)+)?$)|(^[A-Z][a-z]+(( [A-Z][a-z]+)+)?$)|(^[a-z][a-z]+(( [a-z][a-z]+)+)?$)|(^[а-яё][а-яё]+(( [а-яё][а-яё]+)+)?$)/.test(value),
     },
   },
   email: {
