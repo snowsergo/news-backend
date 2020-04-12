@@ -12,13 +12,14 @@ const limiter = require('./modules/rate-limiter'); // подключили ог�
 const { userSignin, userSignup } = require('./modules/validators');
 const config = require('./config.js'); //  в этом файле временная база данных в формате json
 
+const { NODE_ENV, MONGO_DB_ADR } = process.env; // адресс базы данных из переменной окружения
 const { PORT } = config;
 const routerusers = require('./routes/users.js');
 const routerarticle = require('./routes/article.js');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
+const NotFoundError = require('./errors/not-found-error');
 
 const errorMiddleware = require('./middlewares/error.js');
 
@@ -32,7 +33,7 @@ app.use(helmet()); // подключаем заголовки безопасно
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // подключаемся к серверу mongo, mestodb - название бд
-mongoose.connect('mongodb://localhost:27017/newsdb', {
+mongoose.connect(NODE_ENV === 'production' ? MONGO_DB_ADR : 'mongodb://localhost:27017/newsdb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -59,8 +60,8 @@ app.use('/articles', routerarticle);
 
 
 // запрос на несуществующий адрес
-app.all('*', (req, res) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+app.all('*', () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
 // подключаем логгер ошибок в файл
