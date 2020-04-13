@@ -4,8 +4,10 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-error');
 const AuthError = require('../errors/auth-error');
 const { createUserHandler } = require('../modules/error-handlers');
+const messages = require('../modules/text-constants');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+// const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET } = require('../config');
 
 // аутентификация пользователя
 module.exports.login = (req, res, next) => {
@@ -13,7 +15,7 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // создадим токен с ключем из переменных окружения
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.cookie('jwt', token, { // вернем токен в виде http-куки продолжительность жизни 7 дней
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
@@ -21,7 +23,7 @@ module.exports.login = (req, res, next) => {
       })
         .end(); // если у ответа нет тела, можно использовать метод end
     })
-    .catch((err) => next(new AuthError(`Ошибка аутентификации: ${err.message}`)));
+    .catch((err) => next(new AuthError(`${messages.authFailed} ${err.message}`)));
 };
 
 // создание пользователя
@@ -49,7 +51,7 @@ module.exports.getUser = (req, res, next) => {
     .then((user) => {
       if (user) {
         res.send({ data: user });
-      } throw new NotFoundError(`Пользователь с ID ${owner} не найден`);
+      } throw new NotFoundError(`${messages.notFoundUser} ${owner} `);
     })
     .catch((err) => next(err));
 };

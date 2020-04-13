@@ -1,7 +1,7 @@
 const Article = require('../models/article');
 const NotFoundError = require('../errors/not-found-error');
-// const AutorError = require('../errors/autor-error');
 const { createArticleHandler } = require('../modules/error-handlers');
+const messages = require('../modules/text-constants');
 
 // создание новой  статьи
 module.exports.createArticle = (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getAllArticles = (req, res, next) => {
   Article.find({ owner: req.user._id })
     .then((articles) => {
       if (articles.length === 0) {
-        throw new NotFoundError('Сохраненных статей у данного пользователя не существует');
+        throw new NotFoundError(messages.noSavedArticles);
       } else {
         res.send({ data: articles });
       }
@@ -40,15 +40,15 @@ module.exports.deleteArticle = (req, res, next) => {
   Article.find({ owner: req.user._id })
     .then((userArticles) => {
       if (userArticles.length === 0) {
-        throw new NotFoundError('У пользователя нет сохраненных статей');
+        throw new NotFoundError(messages.noSavedArticles);
       } else {
         Article.find({ _id: req.params.articleId })
           .then((articles) => {
             if (articles.length === 0) {
-              throw new NotFoundError(`Статьи с ID ${req.params.articleId} не существует`);
+              throw new NotFoundError(`${messages.wrongArticleId} ${req.params.articleId}`);
             } else {
               Article.findByIdAndRemove(req.params.articleId)
-                .then(() => res.status(200).send({ message: 'Статья удалена' }))
+                .then(() => res.status(200).send({ message: messages.successfullDelete }))
                 .catch((err) => next(err));
             }
           })
