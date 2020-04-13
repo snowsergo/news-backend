@@ -37,21 +37,13 @@ module.exports.getAllArticles = (req, res, next) => {
 
 // удаление статьи
 module.exports.deleteArticle = (req, res, next) => {
-  Article.find({ owner: req.user._id })
-    .then((userArticles) => {
-      if (userArticles.length === 0) {
-        throw new NotFoundError(messages.noSavedArticles);
+  Article.find({ _id: req.params.articleId, owner: req.user._id })
+    .then((articles) => {
+      if (articles.length === 0) {
+        throw new NotFoundError(`${messages.wrongArticleId} ${req.params.articleId}`);
       } else {
-        Article.find({ _id: req.params.articleId })
-          .then((articles) => {
-            if (articles.length === 0) {
-              throw new NotFoundError(`${messages.wrongArticleId} ${req.params.articleId}`);
-            } else {
-              Article.findByIdAndRemove(req.params.articleId)
-                .then(() => res.status(200).send({ message: messages.successfullDelete }))
-                .catch((err) => next(err));
-            }
-          })
+        Article.findByIdAndRemove(req.params.articleId)
+          .then(() => res.status(200).send({ message: messages.successfullDelete }))
           .catch((err) => next(err));
       }
     })

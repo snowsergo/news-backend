@@ -1,6 +1,6 @@
 const messages = {
   noSavedArticles: 'У пользователя нет сохраненных статей',
-  wrongArticleId: 'Не существет статьи с ID:',
+  wrongArticleId: 'Не существет сохраненной статьи с ID:',
   successfullDelete: 'Статья удалена',
   authFailed: 'Ошибка аутентификации:',
   notFoundUser: 'Не найден пользователь с ID:',
