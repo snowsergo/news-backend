@@ -1,10 +1,8 @@
 const jwt = require('jsonwebtoken');
-
-// const { NODE_ENV, JWT_SECRET } = process.env;
 const { JWT_SECRET } = require('../config');
 const AuthError = require('../errors/auth-error');
 const messages = require('../modules/text-constants');
-// eslint-disable-next-line consistent-return
+
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
   let payload;
