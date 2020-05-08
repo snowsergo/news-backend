@@ -5,6 +5,8 @@ const morgan = require('morgan'); // для логов
 const mongoose = require('mongoose'); // для работы с базой данных
 const bodyParser = require('body-parser');// подключили body-parser
 const { errors } = require('celebrate'); // обработчик ошибок celebrate
+const cors = require('cors');
+
 const limiter = require('./modules/rate-limiter'); // подключили ограничение зколичества запросов
 const { PORT, DB_ADR } = require('./config.js'); //  в этом файле временная база данных в формате json
 const router = require('./routes/index'); // подключаем глобальный роутер
@@ -12,11 +14,27 @@ const { requestLogger, errorLogger } = require('./middlewares/logger'); // мо�
 const errorMiddleware = require('./middlewares/error.js'); // централизованный обработчик ошибок
 const messages = require('./modules/text-constants');
 
-const app = express(); // запускаем приложение на express
+const app = express();// запускаем приложение на express
+
+/*
+app.options('*', (req, res) => {
+  res.sendStatus(200);
+});
+*/
 
 app.use(cookieParser()); // подключаем парсер кук как мидлвэр
 app.use(limiter); // ограничение на количество запросов
 app.use(helmet()); // подключаем заголовки безопасности
+
+// разрешили все кросс-доменные запросы
+// app.use(cors());
+/*
+app.use(cors({
+  origin: 'http://localhost:8081',
+  optionsSuccessStatus: 200,
+  credentials: true,
+}));
+*/
 
 // подключаем body-parser как мидлвару всего приложения
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,6 +56,9 @@ app.get('/crash-test', () => {
     throw new Error(messages.serverIsDown);
   }, 0);
 });
+
+// разрешили все кросс-доменные запросы
+app.use(cors());
 
 // подключили все роуты
 app.use(router);
