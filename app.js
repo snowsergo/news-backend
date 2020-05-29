@@ -57,12 +57,20 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+const whitelist = ['https://snowsergo.github.io', 'http://snowsergo-news.tk'];
 // разрешили все кросс-доменные запросы
 app.use(
   cors({
-    origin: 'https://snowsergo.github.io',
+    // origin: 'https://snowsergo.github.io',
     // origin: 'http://localhost:8080',
-    //  origin: 'http://snowsergo-news.tk',
+    // origin: 'http://snowsergo-news.tk',
+    origin(origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     optionsSuccessStatus: 200,
     credentials: true,
   }),
