@@ -58,7 +58,11 @@ app.get('/crash-test', () => {
 });
 
 // разрешили все кросс-доменные запросы
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:8080',
+  optionsSuccessStatus: 200,
+  credentials: true,
+}));
 
 // подключили все роуты
 app.use(router);

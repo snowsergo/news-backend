@@ -11,7 +11,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 30,
+    // maxlength: 30,
   },
   text: {
     type: String,
@@ -34,14 +34,14 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (link) => /^https?:\/\/(www\.)?[a-z]+\.[a-z]+(((\/(\d|[a-zA-Z]))((-|=|\?|\.)?([a-zA-Z]|\d))*)+)$/.test(link),
+      validator: (link) => /https?:\/\/(www\.)?(([a-z\d]+)\.)+[a-z]+(((\/(\d|[a-zA-Z]|#)+)((_|-|=|\?|\.)?([a-zA-Z]|\d))*)+)\/?$/.test(link),
     },
   },
   image: {
     type: String,
     required: true,
     validate: {
-      validator: (link) => /^https?:\/\/(www\.)?[a-z]+\.[a-z]+(((\/(\d|[a-zA-Z]))((-|=|\?|\.)?([a-zA-Z]|\d))*)+)(\.(?:jpg|jpeg|png))?$/.test(link),
+      validator: (link) => /^https?:\/\/(www\.)?(([a-z]|\d|(#|_|-|=|\?|\.))+\.)+[a-z]+(((\/(\d|[a-zA-Z])?)((#|_|-|=|\?|\.)?([a-zA-Z]|\d)?)*)+)(\.(?:jpg|jpeg|png))?$/.test(link),
     },
   },
   owner: {
