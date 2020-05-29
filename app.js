@@ -3,9 +3,9 @@ const helmet = require('helmet'); // модуль для простановки 
 const cookieParser = require('cookie-parser'); // для работы с куками
 const morgan = require('morgan'); // для логов
 const mongoose = require('mongoose'); // для работы с базой данных
-const bodyParser = require('body-parser');// подключили body-parser
+const bodyParser = require('body-parser'); // подключили body-parser
 const { errors } = require('celebrate'); // обработчик ошибок celebrate
-// const cors = require('cors');
+const cors = require('cors');
 
 const limiter = require('./modules/rate-limiter'); // подключили ограничение зколичества запросов
 const { PORT, DB_ADR } = require('./config.js'); //  в этом файле временная база данных в формате json
@@ -14,7 +14,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger'); // мо�
 const errorMiddleware = require('./middlewares/error.js'); // централизованный обработчик ошибок
 const messages = require('./modules/text-constants');
 
-const app = express();// запускаем приложение на express
+const app = express(); // запускаем приложение на express
 
 /*
 app.options('*', (req, res) => {
@@ -58,11 +58,13 @@ app.get('/crash-test', () => {
 });
 
 // разрешили все кросс-доменные запросы
-// app.use(cors({
-// origin: 'http://localhost:8080',
-// optionsSuccessStatus: 200,
-// credentials: true,
-// }));
+app.use(
+  cors({
+    origin: 'https://snowsergo.github.io',
+    optionsSuccessStatus: 200,
+    credentials: true,
+  }),
+);
 
 // подключили все роуты
 app.use(router);
