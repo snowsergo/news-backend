@@ -57,7 +57,15 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-const whitelist = ['https://snowsergo.github.io', 'http://snowsergo-news.tk'];
+const whitelist = [
+  'https://snowsergo.github.io',
+  'http://snowsergo.github.io',
+  'http://snowsergo-news.tk',
+  'http://www.snowsergo-news.tk',
+  'http://localhost:8080',
+  'https://snowsergo.github.io/news-frontend/',
+  'http://snowsergo.github.io/news-frontend/',
+];
 // разрешили все кросс-доменные запросы
 app.use(
   cors({
@@ -75,7 +83,6 @@ app.use(
     credentials: true,
   }),
 );
-
 
 // подключили все роуты
 app.use(router);
