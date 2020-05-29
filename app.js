@@ -60,7 +60,7 @@ app.get('/crash-test', () => {
 // разрешили все кросс-доменные запросы
 app.use(
   cors({
-    origin: 'https://snowsergo.github.io/news-frontend/',
+    origin: 'https://snowsergo.github.io',
     // origin: 'http://localhost:8080',
     //  origin: 'http://snowsergo-news.tk',
     optionsSuccessStatus: 200,
