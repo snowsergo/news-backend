@@ -5,7 +5,7 @@ const morgan = require('morgan'); // для логов
 const mongoose = require('mongoose'); // для работы с базой данных
 const bodyParser = require('body-parser');// подключили body-parser
 const { errors } = require('celebrate'); // обработчик ошибок celebrate
-const cors = require('cors');
+// const cors = require('cors');
 
 const limiter = require('./modules/rate-limiter'); // подключили ограничение зколичества запросов
 const { PORT, DB_ADR } = require('./config.js'); //  в этом файле временная база данных в формате json
@@ -58,11 +58,11 @@ app.get('/crash-test', () => {
 });
 
 // разрешили все кросс-доменные запросы
-app.use(cors({
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200,
-  credentials: true,
-}));
+// app.use(cors({
+// origin: 'http://localhost:8080',
+// optionsSuccessStatus: 200,
+// credentials: true,
+// }));
 
 // подключили все роуты
 app.use(router);
