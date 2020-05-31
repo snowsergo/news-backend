@@ -60,14 +60,19 @@ app.get('/crash-test', () => {
 const whitelist = [
   'https://snowsergo.github.io',
   'http://snowsergo.github.io',
-  'http://snowsergo-news.tk',
-  'http://www.snowsergo-news.tk',
-  'http://localhost:8080',
-  'https://snowsergo-news.tk',
-  'https://www.snowsergo-news.tk',
-  'https://localhost:8080',
   'https://snowsergo.github.io/news-frontend/',
   'http://snowsergo.github.io/news-frontend/',
+  'http://snowsergo-news.tk',
+  'http://www.snowsergo-news.tk',
+  'https://snowsergo-news.tk',
+  'https://www.snowsergo-news.tk',
+  'http://localhost:8080',
+  'https://localhost:8080',
+  'https://newsapi.org',
+  'https://newsapi.org/',
+  'https://newsapi.org/v2',
+  'https://newsapi.org/v2/',
+
 ];
 // разрешили все кросс-доменные запросы
 app.use(
