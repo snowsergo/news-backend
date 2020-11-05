@@ -93,7 +93,7 @@ app.use(
 );
 
 // подключили все роуты
-app.use(router);git
+app.use(router);
 
 // подключаем логгер ошибок в файл
 app.use(errorLogger);
