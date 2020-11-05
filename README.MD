@@ -4,12 +4,6 @@
 ## Текущая версия
 1.0.3
 
-## Адреса для отправки запросов
-- [https://www.api.snowsergo-news.tk](https://www.api.snowsergo-news.tk)
-- [https://api.snowsergo-news.tk](https://api.snowsergo-news.tk)
-
-## Функционол
-
 
 ### version 1.0.3
 - данные конфигурации импортируются из .env в confg.js и затем в приложение
