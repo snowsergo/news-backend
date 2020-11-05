@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     select: false, // Так по умлочанию хеш пароля пользователя не будет возвращаться из базы
   },
+  activated: {
+    type: Boolean,
+    // select: false, // Так по умлочанию хеш пароля пользователя не будет возвращаться из базы
+  },
+
 });
 
 // eslint-disable-next-line func-names

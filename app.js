@@ -28,13 +28,13 @@ app.use(helmet()); // подключаем заголовки безопасно
 
 // разрешили все кросс-доменные запросы
 // app.use(cors());
-/*
+
 app.use(cors({
-  origin: 'http://localhost:8081',
+  origin: 'http://localhost:4000',
   optionsSuccessStatus: 200,
   credentials: true,
 }));
-*/
+
 
 // подключаем body-parser как мидлвару всего приложения
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -72,7 +72,7 @@ const whitelist = [
   'https://newsapi.org/',
   'https://newsapi.org/v2',
   'https://newsapi.org/v2/',
-
+  'http://localhost:3000',
 ];
 // разрешили все кросс-доменные запросы
 app.use(
@@ -93,7 +93,7 @@ app.use(
 );
 
 // подключили все роуты
-app.use(router);
+app.use(router);git
 
 // подключаем логгер ошибок в файл
 app.use(errorLogger);
